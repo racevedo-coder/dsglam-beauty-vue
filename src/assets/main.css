@@ -1073,3 +1073,15 @@ html { scroll-behavior: smooth; }
 #app {
   display: contents;
 }
+
+.ventana-opinion,
+.ventana-opinion * {
+  box-sizing: border-box;
+}
+
+.ventana-opinion input,
+.ventana-opinion select,
+.ventana-opinion textarea {
+  width: 100%;
+  max-width: 100%;
+}
