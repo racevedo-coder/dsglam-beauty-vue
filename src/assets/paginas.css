@@ -16,6 +16,15 @@
   background-color: #faf2f6;
   border-bottom: 1px solid #c36fa3;
 }
+.header-interno .barra {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
 
 .header-interno h2 {
   font-weight: 600;

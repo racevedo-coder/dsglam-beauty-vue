@@ -393,12 +393,13 @@ aside {
   bottom: 20px;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 10px;
 }
 
 aside img {
-  width: 30px;
-  height: 30px;
+  display: block;
+  width: 40px;
+  height: 40px;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
@@ -408,12 +409,17 @@ aside a:nth-child(3) {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   background-color: #9b1b6b;
   border-radius: 50%;
   box-shadow: 0 4px 12px rgba(155, 27, 107, 0.4);
   transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+aside a:nth-child(3) i {
+  color: #fff;
+  font-size: 17px;
 }
 
 aside a:nth-child(3):hover {
@@ -421,10 +427,6 @@ aside a:nth-child(3):hover {
   transform: translateY(-3px);
 }
 
-aside a:nth-child(3) i {
-  color: #fff;
-  font-size: 15px;
-}
 
 /* animacion con scroll en css para que aparezca al bajar */
 @supports (animation-timeline: scroll()) {
@@ -1032,6 +1034,38 @@ html { scroll-behavior: smooth; }
         visibility: visible;
       }
     }
+  }
+}
+
+@media (max-width: 1024px) {
+  .barra {
+    position: relative;
+  }
+
+  .menu-boton {
+    display: block;
+    font-size: 26px;
+    color: #9b1b6b;
+    cursor: pointer;
+  }
+
+  .nav ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 20px;
+    z-index: 100;
+    flex-direction: column;
+    gap: 8px;
+    background-color: #fff;
+    padding: 14px 18px;
+    border: 1px solid #f0c9da;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  .menu-toggle:checked ~ ul {
+    display: flex;
   }
 }
 
