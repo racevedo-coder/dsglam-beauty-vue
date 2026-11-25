@@ -1,12 +1,14 @@
 <script setup>
-import { ref } from 'vue'
-import { RouterLink } from 'vue-router'
+import { ref, computed } from 'vue'
+import { RouterLink, useRoute } from 'vue-router'
 
 const menuAbierto = ref(false)
+const route = useRoute()
+const esInicio = computed(() => route.name === 'home')
 </script>
 
 <template>
-  <header class="header">
+  <header :class="esInicio ? 'header' : 'header-interno'">
     <div class="barra">
       <h2>DsGlam-Beauty</h2>
       <nav class="nav" aria-label="Navegación principal">
