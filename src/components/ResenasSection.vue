@@ -1,9 +1,14 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import OpinionModal from './OpinionModal.vue'
 
 const resenasBase = ref([])
+const nuevas = ref([])
 const cargando = ref(true)
 const error = ref('')
+const modalAbierta = ref(false)
+
+const todas = computed(() => [...nuevas.value, ...resenasBase.value])
 
 async function cargarResenas() {
   cargando.value = true
@@ -34,13 +39,19 @@ async function cargarResenas() {
   }
 }
 
+function agregarResena(datos) {
+  nuevas.value.unshift({ id: Date.now(), ...datos, propia: true })
+}
+
 onMounted(cargarResenas)
 </script>
 
 <template>
   <section class="sectionresenas" id="opiniones" aria-label="Opiniones de clientas">
     <h2>Lo que dicen nuestras clientas</h2>
-    <button type="button" id="abrir-opinion" class="btn-ver">Escribir una opinión</button>
+    <button type="button" id="abrir-opinion" class="btn-ver" @click="modalAbierta = true">
+      Escribir una opinión
+    </button>
 
     <div id="resenas" class="resenas">
       <p v-if="cargando" class="cargando">Cargando opiniones...</p>
@@ -51,7 +62,7 @@ onMounted(cargarResenas)
       </div>
 
       <template v-else>
-        <article v-for="r in resenasBase" :key="r.id" class="resena">
+        <article v-for="r in todas" :key="r.id" class="resena">
           <p class="estrellas" :aria-label="r.estrellas + ' de 5 estrellas'">
             {{ '★'.repeat(r.estrellas) + '☆'.repeat(5 - r.estrellas) }}
           </p>
@@ -62,4 +73,6 @@ onMounted(cargarResenas)
       </template>
     </div>
   </section>
+
+  <OpinionModal :abierta="modalAbierta" @cerrar="modalAbierta = false" @publicar="agregarResena" />
 </template>
