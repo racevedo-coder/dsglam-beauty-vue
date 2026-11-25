@@ -1034,3 +1034,7 @@ html { scroll-behavior: smooth; }
     }
   }
 }
+
+#app {
+  display: contents;
+}

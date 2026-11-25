@@ -1,4 +1,3 @@
-
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import CatalogoView from '../views/CatalogoView.vue'
@@ -17,7 +16,7 @@ const router = createRouter({
     return { top: 0 }
   },
   routes: [
-    { path: '/', name: 'home', component: HomeView },
+    { path: '/', name: 'home', component: HomeView, meta: { bodyClass: 'inicio' } },
     { path: '/catalogo', name: 'catalogo', component: CatalogoView },
     { path: '/servicio/:id', name: 'detalle', component: DetalleView },
     { path: '/galeria', name: 'galeria', component: GaleriaView },
@@ -25,6 +24,10 @@ const router = createRouter({
     { path: '/contacto', name: 'contacto', component: ContactoView },
     { path: '/:pathMatch(.*)*', name: 'not-found', component: NotFoundView },
   ],
+})
+
+router.afterEach((to) => {
+  document.body.className = to.meta.bodyClass || ''
 })
 
 export default router
