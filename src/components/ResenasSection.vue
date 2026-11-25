@@ -1,14 +1,32 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 import OpinionModal from './OpinionModal.vue'
 
+const CLAVE_RESENAS = 'resenasNuevas'
+
+function obtenerNuevas() {
+  try {
+    return JSON.parse(localStorage.getItem(CLAVE_RESENAS)) || []
+  } catch {
+    return []
+  }
+}
+
 const resenasBase = ref([])
-const nuevas = ref([])
+const nuevas = ref(obtenerNuevas())
 const cargando = ref(true)
 const error = ref('')
 const modalAbierta = ref(false)
 
 const todas = computed(() => [...nuevas.value, ...resenasBase.value])
+
+watch(
+  nuevas,
+  (lista) => {
+    localStorage.setItem(CLAVE_RESENAS, JSON.stringify(lista))
+  },
+  { deep: true },
+)
 
 async function cargarResenas() {
   cargando.value = true
@@ -43,6 +61,13 @@ function agregarResena(datos) {
   nuevas.value.unshift({ id: Date.now(), ...datos, propia: true })
 }
 
+function eliminarResena(id) {
+  if (!confirm('¿Quieres eliminar tu opinión?')) {
+    return
+  }
+  nuevas.value = nuevas.value.filter((n) => n.id !== id)
+}
+
 onMounted(cargarResenas)
 </script>
 
@@ -69,6 +94,9 @@ onMounted(cargarResenas)
           <p>{{ r.comentario }}</p>
           <strong>{{ r.nombre }}</strong>
           <small>{{ r.servicio }}</small>
+          <button v-if="r.propia" type="button" class="btn-borrar" @click="eliminarResena(r.id)">
+            Eliminar mi opinión
+          </button>
         </article>
       </template>
     </div>
