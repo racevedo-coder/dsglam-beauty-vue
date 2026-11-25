@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
+import ResenasSection from '../components/ResenasSection.vue'
 
 const servicios = [
   { id: 1, nombre: 'Maquillaje social día', precio: '$ 40.000', img: '/img/inicio1...jpeg', alt: 'Maquillaje social día' },
@@ -123,8 +124,6 @@ onBeforeUnmount(() => {
       </ul>
     </section>
 
-    <section class="sectionresenas" id="opiniones" aria-label="Opiniones de clientas">
-      <h2>Lo que dicen nuestras clientas</h2>
-    </section>
+    <ResenasSection />
   </main>
 </template>
