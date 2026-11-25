@@ -1,18 +1,9 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
+import NavBar from './components/NavBar.vue'
 </script>
 
 <template>
-  <header>
-    <nav>
-      <RouterLink to="/">Inicio</RouterLink>
-      <RouterLink to="/catalogo">Catálogo</RouterLink>
-      <RouterLink to="/galeria">Galería</RouterLink>
-      <RouterLink to="/quienes-somos">¿Quiénes somos?</RouterLink>
-      <RouterLink to="/#opiniones">Opiniones</RouterLink>
-      <RouterLink to="/contacto">Contacto</RouterLink>
-    </nav>
-  </header>
-
+  <NavBar />
   <RouterView />
 </template>
